@@ -15,7 +15,6 @@ if __name__ == "__main__":
     logfile = sys.argv[1]
     pid = int(sys.argv[2])
     p = psutil.Process(pid)
-    ls = os.linesep
     first = True
     with open(logfile, "w+") as fout:
         while True:
@@ -60,7 +59,8 @@ if __name__ == "__main__":
             key_or_val(counters, f"cpu.soft_interrupts", f"{cpus.soft_interrupts}", first)
             key_or_val(counters, f"cpu.syscalls", f"{cpus.syscalls}", first)
 
-            fout.write(f"{' '.join(counters)}{ls}")
+            fout.write(' '.join(counters))
+            fout.write(os.linesep)
             fout.flush()
             first = False
             time.sleep(1)

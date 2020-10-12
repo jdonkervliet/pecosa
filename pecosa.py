@@ -23,9 +23,9 @@ if __name__ == "__main__":
             sys_counters = p.as_dict()
             for k in sorted(sys_counters):
                 v = sys_counters[k]
-                if k in ["environ", "cmdline", "connections", "open_files"]:
+                if k in ["environ", "cmdline", "connections", "open_files", "memory_maps", "threads", "cpu_affinity"]:
                     continue
-                elif k in ["gids", "memory_info", "uids", "num_ctx_switches", "cpu_times"]:
+                elif k in ["gids", "memory_info", "uids", "num_ctx_switches", "cpu_times", "io_counters", "ionice", "memory_full_info"]:
                     vdict = v._asdict()
                     for sk in sorted(vdict):
                         sv = vdict[sk]

@@ -1,7 +1,8 @@
-import psutil
-import sys
 import os
+import sys
 import time
+
+import psutil
 
 
 def key_or_val(li, key, value, header):
@@ -20,14 +21,15 @@ if __name__ == "__main__":
         while True:
             counters = []
 
-            key_or_val(counters, "timestamp", f"{time.time()*1000}", first)
+            key_or_val(counters, "timestamp", f"{time.time() * 1000}", first)
 
             sys_counters = p.as_dict()
             for k in sorted(sys_counters):
                 v = sys_counters[k]
                 if k in ["environ", "cmdline", "connections", "open_files", "memory_maps", "threads", "cpu_affinity"]:
                     continue
-                elif k in ["gids", "memory_info", "uids", "num_ctx_switches", "cpu_times", "io_counters", "ionice", "memory_full_info"]:
+                elif k in ["gids", "memory_info", "uids", "num_ctx_switches", "cpu_times", "io_counters", "ionice",
+                           "memory_full_info"]:
                     vdict = v._asdict()
                     for sk in sorted(vdict):
                         sv = vdict[sk]

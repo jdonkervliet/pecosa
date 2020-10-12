@@ -55,6 +55,20 @@ if __name__ == "__main__":
                 key_or_val(counters, f"disk.write_count.{disk}", f"{disks_disk.write_count}", first)
                 key_or_val(counters, f"disk.write_bytes.{disk}", f"{disks_disk.write_bytes}", first)
 
+            cputimes = psutil.cpu_times(percpu=False)
+            cpudict = cputimes._asdict()
+            for sk in sorted(cpudict):
+                sv = cpudict[sk]
+                key_or_val(counters, f"cpu.{sk}", f"{sv}", first)
+
+            cpupercent = psutil.cpu_percent()
+            key_or_val(counters, f"cpu.percent", f"{cpupercent}", first)
+
+            cpufreq = psutil.cpu_freq()
+            key_or_val(counters, f"cpu.freq.current", f"{cpufreq.current}", first)
+            key_or_val(counters, f"cpu.freq.min", f"{cpufreq.min}", first)
+            key_or_val(counters, f"cpu.freq.max", f"{cpufreq.max}", first)
+
             cpus = psutil.cpu_stats()
             key_or_val(counters, f"cpu.ctx_switches", f"{cpus.ctx_switches}", first)
             key_or_val(counters, f"cpu.interrupts", f"{cpus.interrupts}", first)

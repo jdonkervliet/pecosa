@@ -77,7 +77,7 @@ if __name__ == "__main__":
             key_or_val(counters, f"cpu.soft_interrupts", f"{cpus.soft_interrupts}", first)
             key_or_val(counters, f"cpu.syscalls", f"{cpus.syscalls}", first)
 
-            fout.write('    '.join(counters))
+            fout.write("\t".join(counters))
             fout.write(os.linesep)
             fout.flush()
             first = False
